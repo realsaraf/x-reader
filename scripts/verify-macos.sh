@@ -23,7 +23,7 @@ mkdir "$mount"
 hdiutil attach -readonly -nobrowse -mountpoint "$mount" "$prefix.dmg"
 mounted=true
 codesign --verify --deep --strict "$mount/x-reader.app"
-lipo -verify_arch arm64 x86_64 "$mount/x-reader.app/Contents/MacOS/x-reader"
+lipo "$mount/x-reader.app/Contents/MacOS/x-reader" -verify_arch arm64 x86_64
 hdiutil detach "$mount"
 mounted=false
 

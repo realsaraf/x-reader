@@ -11,7 +11,7 @@ dmg=( "$bundle/dmg/"*"_${version}_"*.dmg )
   echo "Build the universal app and DMG first." >&2; exit 1;
 }
 
-lipo -verify_arch arm64 x86_64 "$app/Contents/MacOS/x-reader"
+lipo "$app/Contents/MacOS/x-reader" -verify_arch arm64 x86_64
 codesign --verify --deep --strict "$app"
 mkdir -p release
 scratch=$(mktemp -d)
