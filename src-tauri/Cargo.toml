@@ -1,0 +1,25 @@
+[package]
+name = "x-reader"
+version = "0.1.0"
+description = "An offline, reflowable desktop book reader"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/realsaraf/x-reader"
+publish = false
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+rusqlite = { version = "0.43", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+tauri = { version = "2", features = [] }
+thiserror = "2"
+
+[dev-dependencies]
+tempfile = "3"
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]
+native-ui-smoke = []

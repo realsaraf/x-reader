@@ -1,0 +1,16 @@
+x-reader for Windows x64
+
+Extract all files from this ZIP into a writable folder. Open x-reader.exe.
+The portable copy requires the Microsoft Edge WebView2 Evergreen Runtime.
+Most current Windows PCs already have it installed. The runtime is available at
+https://developer.microsoft.com/microsoft-edge/webview2/
+
+Keep x-reader.portable next to the application. This file tells x-reader to
+save your books, reading positions, and WebView profile in the adjacent data
+folder. Close the app before moving or backing up the directory.
+
+To upgrade, close the app and extract a newer portable ZIP into the same
+folder. Your library lives in data/library.sqlite3.
+
+Source and release notes
+https://github.com/realsaraf/x-reader

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+public/pdf-assets/
+release/
+artifacts/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.DS_Store

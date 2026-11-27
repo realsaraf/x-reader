@@ -1,0 +1,20 @@
+x-reader for macOS 15 and later
+Apple Silicon and Intel
+
+Extract the ZIP, then move the entire x-reader Portable folder to a writable
+location. Keep x-reader Portable.app and x-reader.portable together. Open the
+app from that folder. If Finder isolates it in a temporary location, use
+Open x-reader.command. The launcher opens the same signed app through macOS
+Launch Services and supplies the location of your extracted folder.
+
+This release is ad hoc signed and has no Apple Developer ID notarization.
+If macOS blocks the first open, inspect the source and verify your download,
+then follow Apple's instructions in System Settings > Privacy & Security.
+https://support.apple.com/en-us/102445
+
+Your books, reading positions and notes are in data/library.sqlite3. Close
+x-reader before moving or backing up its directory. To upgrade, replace the
+app, launcher and notices with the new versions and keep the data folder.
+
+Source and release notes
+https://github.com/realsaraf/x-reader

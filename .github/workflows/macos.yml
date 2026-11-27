@@ -1,0 +1,45 @@
+name: macOS universal build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  universal:
+    runs-on: macos-15
+    env:
+      MACOSX_DEPLOYMENT_TARGET: "15.0"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install the Apple Silicon and Intel Rust targets
+        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+      - run: npm ci
+      - name: Exercise the reader in WebKit
+        run: |
+          npx playwright install webkit
+          npm run test:e2e
+      - name: Build the signed universal app and disk image
+        run: npm run tauri -- build --target universal-apple-darwin --bundles app,dmg
+      - name: Run native storage tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml --release --target aarch64-apple-darwin --features custom-protocol --locked
+      - name: Package and verify both macOS downloads
+        run: |
+          bash scripts/package-macos.sh
+          bash scripts/verify-macos.sh
+      - name: Read and reopen an actual PDF inside WKWebView
+        run: bash scripts/test-native-ui-macos.sh
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: x-reader-macos-universal
+          path: release/
+          retention-days: 14
+          if-no-files-found: error

@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "reader-window",
+  "description": "The reading window can enter fullscreen and finish saving before it closes.",
+  "windows": ["main"],
+  "permissions": [
+    "core:event:allow-listen", "core:event:allow-unlisten",
+    "core:window:allow-destroy",
+    "core:window:allow-is-fullscreen", "core:window:allow-set-fullscreen"
+  ]
+}
